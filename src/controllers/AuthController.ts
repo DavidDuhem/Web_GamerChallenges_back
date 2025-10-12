@@ -10,6 +10,8 @@ import {
 import { JwtRequest } from "../middlewares/authMiddleware.js"
 import { config } from "../../config.js"
 import argon2 from "argon2"
+import crypto from "node:crypto"
+import { sendEmailForgotPassword } from "../utils/emailSenderDev.js"
 
 interface Token {
   token: string
@@ -133,12 +135,12 @@ export default class AuthController extends BaseController<User, "user_id"> {
   }
 
   async refreshAccessToken(req: Request, res: Response) {
-    const rawToken = req.cookies?.refreshToken || req.body?.refreshToken
+    const rawToken = req.cookies?.refreshToken
     if (!rawToken) {
       return res.status(401).json({ message: "Refresh Token non reçu" })
     }
 
-    const existingRefreshToken = await prisma.refreshToken.findFirst({
+    const existingRefreshToken = await prisma.token.findFirst({
       where: { token: rawToken },
       include: { user: true },
     })
@@ -147,7 +149,7 @@ export default class AuthController extends BaseController<User, "user_id"> {
     }
 
     if (existingRefreshToken.expired_at < new Date()) {
-      await prisma.refreshToken.delete({
+      await prisma.token.delete({
         where: { id: existingRefreshToken.id },
       })
       return res.status(401).json({ message: "Refresh Token expiré" })
@@ -180,6 +182,71 @@ export default class AuthController extends BaseController<User, "user_id"> {
 
     res.sendStatus(204)
   }
+
+  async forgotPassword(req: Request, res: Response) {
+    const { email } = req.body
+
+    const user = await prisma.user.findUnique({ where: { email } })
+    if (!user) {
+      return res.status(200).json({
+        message:
+          "Un lien de réinitialisation a été envoyé sur l'email renseigné",
+      })
+    }
+
+    const forgotPasswordToken = crypto.randomBytes(32).toString("hex")
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000)
+
+    await prisma.token.create({
+      data: {
+        token: forgotPasswordToken,
+        token_type: "forgot_pswd",
+        user_id: user.user_id,
+        issued_at: new Date(),
+        expires_at: expiresAt,
+      },
+    })
+
+    await sendEmailForgotPassword({
+      userEmail: user.email,
+      token: forgotPasswordToken,
+    })
+
+    res.json({
+      message: "Un lien de réinitialisation a été envoyé sur l'email renseigné",
+    })
+  }
+
+  async resetPassword(req: Request, res: Response) {
+    const { token, password, confirm } = req.body
+
+    if (password !== confirm) {
+      return res
+        .status(400)
+        .json({ message: "Les mots de passe ne correspondent pas" })
+    }
+
+    console.log(req.body)
+
+    const resetToken = await prisma.token.findUnique({ where: { token } })
+
+    if (!resetToken || resetToken.expires_at < new Date()) {
+      res.status(400).json({ message: "Token invalide ou expiré" })
+    }
+
+    const hashedPassword = await argon2.hash(password)
+
+    await prisma.user.update({
+      where: { user_id: resetToken.user_id },
+      data: { password: hashedPassword },
+    })
+
+    await prisma.token.delete({ where: { id: resetToken.id } })
+
+    res.json({
+      message: "Mot de passe réinitialisé, vous pouvez vous connecter",
+    })
+  }
 }
 
 async function generateAndSetTokens(res: Response, user: User) {
@@ -194,13 +261,16 @@ async function generateAndSetTokens(res: Response, user: User) {
 }
 
 async function replaceRefreshTokenInDatabase(refreshToken: Token, user: User) {
-  await prisma.refreshToken.deleteMany({ where: { user_id: user.user_id } })
-  await prisma.refreshToken.create({
+  await prisma.token.deleteMany({
+    where: { user_id: user.user_id, token_type: "refresh" },
+  })
+  await prisma.token.create({
     data: {
       token: refreshToken.token,
       user_id: user.user_id,
+      token_type: "refresh",
       issued_at: new Date(),
-      expired_at: new Date(new Date().valueOf() + refreshToken.expiresInMS),
+      expires_at: new Date(new Date().valueOf() + refreshToken.expiresInMS),
     },
   })
 }
@@ -227,7 +297,7 @@ function setRefreshTokenCookie(res: Response, refreshToken: Token) {
 async function deleteTokenAndCookies(req: Request, res: Response) {
   const rawToken = req.cookies?.refreshToken
   if (rawToken) {
-    await prisma.refreshToken.deleteMany({ where: { token: rawToken } })
+    await prisma.token.deleteMany({ where: { token: rawToken } })
   }
 
   res.clearCookie("accessToken", {

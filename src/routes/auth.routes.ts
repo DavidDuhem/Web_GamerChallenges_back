@@ -27,7 +27,20 @@ router.get(
   cw((req, res) => authController.me(req, res))
 )
 
-router.post("/refresh", authController.refreshAccessToken)
+router.post(
+  "/refresh",
+  cw((req, res) => authController.refreshAccessToken(req, res))
+)
+
+router.post(
+  "/forgot-password",
+  cw((req, res) => authController.forgotPassword(req, res))
+)
+
+router.post(
+  "/reset-password",
+  cw((req, res) => authController.resetPassword(req, res))
+)
 
 router.patch(
   "/delete/:userId",

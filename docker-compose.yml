@@ -52,6 +52,22 @@ services:
         condition: service_healthy
     networks:
       - gamerchallenge-network
+  gamer-challenges-mailpit:
+    image: axllent/mailpit
+    container_name: gamer-challenges-mailpit
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - gamerchallenge-network
 
 networks:
   gamerchallenge-network:
