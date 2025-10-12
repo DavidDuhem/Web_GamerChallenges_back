@@ -2,6 +2,7 @@ import { Role, VoteUserChallenge, VoteUserEntry } from "@prisma/client"
 import { prisma } from "./index.js"
 import argon2 from "argon2"
 import { shuffleData } from "../src/utils/shuffleData.js"
+import { logger } from "../src/lib/log.js"
 
 interface GameResponse {
   title: string
@@ -34,7 +35,7 @@ const SeedGames = async () => {
     })),
     skipDuplicates: true,
   })
-  console.log("✅  20 games crée avec succés")
+  logger.info("✅  20 games crée avec succés")
 }
 
 const SeedUsers = async () => {
@@ -64,18 +65,18 @@ const SeedUsers = async () => {
     skipDuplicates: true,
   })
 
-  console.log("✅ 40 users créés avec succès !")
+  logger.info("✅ 40 users créés avec succès !")
 }
 
 const SeedChallenge = async () => {
   const games = await game.findMany({ take: 20 })
   if (games.length === 0) {
-    console.log("Aucun jeux")
+    logger.info("Aucun jeux")
     return
   }
   const users = await user.findMany({ take: 2 })
   if (users.length === 0) {
-    console.log("Aucun User")
+    logger.info("Aucun User")
     return
   }
   const sampleTitles = [
@@ -123,14 +124,14 @@ const SeedChallenge = async () => {
     data: challenges,
     skipDuplicates: true,
   })
-  console.log("✅ 20 challenges crée avec succés")
+  logger.info("✅ 20 challenges crée avec succés")
 }
 
 const SeedEntries = async () => {
   const challenges = await challenge.findMany()
   const users = await user.findMany()
   if (challenges.length === 0 || users.length === 0) {
-    console.log(
+    logger.info(
       "Pas de challenges ou d’utilisateurs pour créer des participations"
     )
     return
@@ -173,9 +174,9 @@ const SeedEntries = async () => {
       data: entries,
       skipDuplicates: true,
     })
-    console.log(`✅ ${entries.length} participations créées avec succès`)
+    logger.info(`✅ ${entries.length} participations créées avec succès`)
   } else {
-    console.log("Aucune participation générée (tirage aléatoire = 0).")
+    logger.info("Aucune participation générée (tirage aléatoire = 0).")
   }
 }
 
@@ -197,7 +198,7 @@ const seedVoteChallenge = async () => {
     data: voteChallengeData,
     skipDuplicates: true,
   })
-  console.log(`✅ ${voteChallengeData.length} Votes sur challenges créés`)
+  logger.info(`✅ ${voteChallengeData.length} Votes sur challenges créés`)
 }
 
 const seedVoteUserEntry = async () => {
@@ -220,7 +221,7 @@ const seedVoteUserEntry = async () => {
     data: voteEntryData,
     skipDuplicates: true,
   })
-  console.log(`✅ ${voteEntryData.length} Votes sur entries créés`)
+  logger.info(`✅ ${voteEntryData.length} Votes sur entries créés`)
 }
 await clearSeeding()
 await SeedUsers()
@@ -230,4 +231,4 @@ await SeedEntries()
 await seedVoteChallenge()
 await seedVoteUserEntry()
 
-console.log(`📊 Seeding succeeded.`)
+logger.info(`📊 Seeding succeeded.`)

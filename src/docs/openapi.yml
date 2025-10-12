@@ -1,0 +1,455 @@
+openapi: 3.0.4
+info:
+  title: Swagger Gamer Challenges - OpenAPI 3.0
+  description: |-
+    Our project Gamer Challenges is a student project to join gamers around the world to challenge each other in games. 
+    Users can post challenges, show game records, and compete.
+  termsOfService: https://GamerChallenges.io/terms/
+  contact:
+    email: gamerChallenge@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+servers:
+  - url: http://localhost:5000/api/
+tags:
+  - name: auth
+    description: Authentication & user access
+  - name: game
+    description: Manage and fetch available games
+  - name: logout
+    description: Disconnect from application
+  - name: challenges
+    description: Create and manage gaming challenges
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register a new user
+      description: Register a new user by providing email, password, and other details.
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+        "400":
+          description: Passwords do not match
+        "409":
+          description: Email already in use
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login user
+      description: Authenticate user and return access token as cookie.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "401":
+          description: Invalid credentials
+  /auth/logout:
+    post:
+      tags:
+        - logout
+      summary: Logout user
+      description: Clear the access token cookie.
+      operationId: logoutUser
+      responses:
+        "204":
+          description: Successfully logged out
+  /auth/me:
+    get:
+      tags:
+        - auth
+      summary: Get current user
+      description: Retrieve the currently authenticated user's profile.
+      operationId: getCurrentUser
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+  /auth/delete/{userId}:
+    patch:
+      tags:
+        - auth
+      summary: Soft delete user
+      description: Soft deletes the user account by anonymizing user data.
+      operationId: softDeleteUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: User soft-deleted
+        "403":
+          description: Forbidden - user not authorized
+  /games:
+    get:
+      tags:
+        - game
+      summary: Get all games
+      description: Retrieve all games that can be selected when creating a challenge.
+      operationId: getAllGames
+      responses:
+        "200":
+          description: A list of games
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Game"
+        "500":
+          description: Server error
+  /challenges:
+    post:
+      tags:
+        - challenges
+      summary: Create a new challenge
+      description: Create a new gaming challenge with validation rules.
+      operationId: createChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChallengeCreateRequest"
+      responses:
+        "201":
+          description: Challenge successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChallengeCreateResponse"
+        "400":
+          description: Validation failed - invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "404":
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /entries/{entryId}:
+    patch:
+      tags:
+        - challenges
+      summary: Update an entry
+      description: Update the details of a specific entry by its ID.
+      operationId: updateEntry
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Updated entry data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EntryUpdateRequest"
+      responses:
+        "200":
+          description: Entry updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntryResponse"
+        "400":
+          description: Invalid input data
+        "403":
+          description: Unauthorized to update this entry
+        "404":
+          description: Entry not found
+        "500":
+          description: Server error
+    delete:
+      tags:
+        - challenges
+      summary: Delete an entry
+      description: Delete a specific entry by its ID.
+      operationId: deleteEntry
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Entry deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Entry deleted"
+        "403":
+          description: Unauthorized to delete this entry
+        "404":
+          description: Entry not found
+        "500":
+          description: Server error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - pseudo
+        - email
+        - password
+        - confirm
+      properties:
+        pseudo:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        confirm:
+          type: string
+          format: password
+    RegisterResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    LoginResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        pseudo:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    Game:
+      type: object
+      properties:
+        game_id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "League of Legends"
+        image_url:
+          type: string
+          format: uri
+          example: "https://www.example.com/lol.jpg"
+    ChallengeCreateRequest:
+      type: object
+      required:
+        - title
+        - description
+        - rules
+        - game_title
+        - userId
+      properties:
+        title:
+          type: string
+          minLength: 3
+          description: Challenge title with minimum 3 characters
+          example: "Weekly Tournament"
+        description:
+          type: string
+          minLength: 10
+          description: Challenge description with minimum 10 characters
+          example: "Compete in this weekly tournament to win amazing prizes!"
+        rules:
+          type: string
+          minLength: 10
+          description: Challenge rules with minimum 10 characters
+          example: "No cheating allowed. Fair play required. Best of 3 matches."
+        game_title:
+          type: string
+          description: Title of the game for this challenge
+          example: "League of Legends"
+        userId:
+          type: integer
+          description: ID of the user creating the challenge
+          example: 1
+    ChallengeCreateResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Challenge créé"
+        challenge:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            title:
+              type: string
+              example: "Weekly Tournament"
+            description:
+              type: string
+              example: "Compete in this weekly tournament to win amazing prizes!"
+            rules:
+              type: string
+              example: "No cheating allowed. Fair play required. Best of 3 matches."
+            game_id:
+              type: integer
+              example: 1
+            user_id:
+              type: integer
+              example: 1
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Validation échouée"
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "too_small"
+              path:
+                type: array
+                items:
+                  type: string
+                example: ["title"]
+              message:
+                type: string
+                example: "Le titre doit contenir au moins 3 caractères"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Erreur serveur"
+        details:
+          type: string
+          example: "Database connection failed"
+    EntryUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        video_url:
+          type: string
+          format: uri
+    EntryResponse:
+      type: object
+      properties:
+        entry_id:
+          type: integer
+        title:
+          type: string
+        video_url:
+          type: string
+          format: uri
+        user_id:
+          type: integer
+        challenge_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time

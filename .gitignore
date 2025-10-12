@@ -7,3 +7,8 @@ Dockerfile
 .dockerignore
 pg-data/
 /generated/prisma
+
+/logs
+
+# Mailpit local data
+/data

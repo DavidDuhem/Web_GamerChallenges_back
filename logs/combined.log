@@ -1,0 +1,87 @@
+{"level":"info","message":"🚀 Server started at http://localhost:5000","timestamp":"2025-10-03 12:44:20"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":32.94,"status_code":401,"timestamp":"2025-10-03 12:45:15","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":1.685,"status_code":401,"timestamp":"2025-10-03 12:45:27","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"error","timestamp":"2025-10-03 12:45:28"}
+{"content_length":"60","ip":"::ffff:172.23.0.1","level":"error","message":"HTTP Request","method":"POST","response_time":315.549,"status_code":500,"timestamp":"2025-10-03 12:45:28","url":"/api/auth/login","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":0.432,"status_code":401,"timestamp":"2025-10-03 12:45:36","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"error","timestamp":"2025-10-03 12:45:36"}
+{"content_length":"60","ip":"::ffff:172.23.0.1","level":"error","message":"HTTP Request","method":"POST","response_time":636.746,"status_code":500,"timestamp":"2025-10-03 12:45:36","url":"/api/auth/login","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":0.283,"status_code":401,"timestamp":"2025-10-03 12:45:38","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"error","timestamp":"2025-10-03 12:45:38"}
+{"content_length":"60","ip":"::ffff:172.23.0.1","level":"error","message":"HTTP Request","method":"POST","response_time":813.906,"status_code":500,"timestamp":"2025-10-03 12:45:39","url":"/api/auth/login","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"info","message":"✅ 40 users créés avec succès !","timestamp":"2025-10-03 12:46:39"}
+{"level":"info","message":"✅  20 games crée avec succés","timestamp":"2025-10-03 12:46:40"}
+{"level":"info","message":"✅ 20 challenges crée avec succés","timestamp":"2025-10-03 12:46:40"}
+{"level":"info","message":"✅ 27 participations créées avec succès","timestamp":"2025-10-03 12:46:40"}
+{"level":"info","message":"✅ 104 Votes sur challenges créés","timestamp":"2025-10-03 12:46:40"}
+{"level":"info","message":"✅ 113 Votes sur entries créés","timestamp":"2025-10-03 12:46:40"}
+{"level":"info","message":"📊 Seeding succeeded.","timestamp":"2025-10-03 12:46:40"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":0.236,"status_code":401,"timestamp":"2025-10-03 12:47:18","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":8.464,"status_code":401,"timestamp":"2025-10-03 12:48:05","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":0.264,"status_code":401,"timestamp":"2025-10-03 12:48:13","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"error","timestamp":"2025-10-03 12:48:14"}
+{"content_length":"60","ip":"::ffff:172.23.0.1","level":"error","message":"HTTP Request","method":"POST","response_time":486.502,"status_code":500,"timestamp":"2025-10-03 12:48:14","url":"/api/auth/login","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":1.712,"status_code":401,"timestamp":"2025-10-03 12:48:26","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":0.262,"status_code":401,"timestamp":"2025-10-03 12:48:32","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"error","timestamp":"2025-10-03 12:48:33"}
+{"content_length":"60","ip":"::ffff:172.23.0.1","level":"error","message":"HTTP Request","method":"POST","response_time":663.261,"status_code":500,"timestamp":"2025-10-03 12:48:33","url":"/api/auth/login","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"info","message":"🚀 Server started at http://localhost:5000","timestamp":"2025-10-03 12:50:52"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":21.126,"status_code":401,"timestamp":"2025-10-03 12:51:15","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"37","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":6.648,"status_code":401,"timestamp":"2025-10-03 12:51:23","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"36","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":35.399,"status_code":401,"timestamp":"2025-10-03 12:51:53","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"content_length":"42","ip":"::ffff:172.23.0.1","level":"warn","message":"HTTP Request","method":"GET","response_time":0.358,"status_code":401,"timestamp":"2025-10-03 12:58:29","url":"/api/auth/me","user_agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"}
+{"level":"info","message":"🚀 Server started at http://localhost:5000","timestamp":"2025-10-03 13:42:48"}
+{"level":"info","message":"🚀 Server started at http://localhost:5000","timestamp":"2025-10-03 13:43:02"}
+{"level":"info","message":"✅ 40 users créés avec succès !","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"✅  20 games crée avec succés","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"✅ 20 challenges crée avec succés","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"✅ 31 participations créées avec succès","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"✅ 104 Votes sur challenges créés","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"✅ 105 Votes sur entries créés","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"📊 Seeding succeeded.","timestamp":"2025-10-05 09:12:33"}
+{"level":"info","message":"🚀 Server started at http://localhost:5000","timestamp":"2025-10-05 09:13:40"}
+{"content_length":"36","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"POST","response_time":7.152,"status_code":401,"timestamp":"2025-10-05 09:14:47","url":"/api/auth/refresh","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"60","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"DELETE","response_time":2.131,"status_code":403,"timestamp":"2025-10-05 09:15:03","url":"/api/entries/1","user_agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1"}
+{"content_length":"60","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"DELETE","response_time":1.363,"status_code":403,"timestamp":"2025-10-05 09:15:22","url":"/api/entries/1","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"60","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"DELETE","response_time":1.479,"status_code":403,"timestamp":"2025-10-05 09:15:24","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"59","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"PATCH","response_time":1.708,"status_code":403,"timestamp":"2025-10-05 09:15:29","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"59","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"PATCH","response_time":1.655,"status_code":403,"timestamp":"2025-10-05 09:15:30","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"59","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"PATCH","response_time":1.93,"status_code":403,"timestamp":"2025-10-05 09:15:30","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"59","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"PATCH","response_time":1.665,"status_code":403,"timestamp":"2025-10-05 09:15:30","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"59","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"PATCH","response_time":1.547,"status_code":403,"timestamp":"2025-10-05 09:15:30","url":"/api/entries/2","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"content_length":"60","ip":"::ffff:172.18.0.1","level":"warn","message":"HTTP Request","method":"DELETE","response_time":1.985,"status_code":403,"timestamp":"2025-10-05 09:15:41","url":"/api/entries/7","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:26"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:26"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:26"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:27"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:28"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:30"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
+{"level":"error","message":"IP bloquée: ::ffff:172.18.0.1","timestamp":"2025-10-05 09:18:34"}
