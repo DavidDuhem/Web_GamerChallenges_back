@@ -6,4 +6,4 @@ services:
       - POSTGRES_PASSWORD=gamerchallengestest
       - POSTGRES_DB=gamerchallengestest
     ports:
-      - 5437:5432
+      - 5432
