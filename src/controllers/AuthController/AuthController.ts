@@ -1,17 +1,17 @@
-import BaseController from "./BaseController.js"
+import BaseController from "../BaseController.js"
 import type { Request, Response } from "express"
-import { prisma } from "../../prisma/index.js"
+import { prisma } from "../../../prisma/index.js"
 import { User } from "@prisma/client"
-import { registerSchema, loginSchema } from "../schemas/auth.schema.js"
+import { registerSchema, loginSchema } from "../../schemas/auth.schema.js"
 import {
   generateAccessTokenOnly,
   generateAuthenticationTokens,
-} from "../utils/tokens.js"
-import { JwtRequest } from "../middlewares/authMiddleware.js"
-import { config } from "../../config.js"
+} from "../../utils/tokens.js"
+import { JwtRequest } from "../../middlewares/authMiddleware.js"
+import { config } from "../../../config.js"
 import argon2 from "argon2"
 import crypto from "node:crypto"
-import { sendEmailForgotPassword } from "../utils/emailSenderDev.js"
+import { sendEmailForgotPassword } from "../../utils/emailSenderDev.js"
 
 interface Token {
   token: string
@@ -148,7 +148,7 @@ export default class AuthController extends BaseController<User, "user_id"> {
       return res.status(401).json({ message: "Refresh Token invalide" })
     }
 
-    if (existingRefreshToken.expired_at < new Date()) {
+    if (existingRefreshToken.expires_at < new Date()) {
       await prisma.token.delete({
         where: { id: existingRefreshToken.id },
       })
@@ -231,7 +231,7 @@ export default class AuthController extends BaseController<User, "user_id"> {
     const resetToken = await prisma.token.findUnique({ where: { token } })
 
     if (!resetToken || resetToken.expires_at < new Date()) {
-      res.status(400).json({ message: "Token invalide ou expiré" })
+      return res.status(400).json({ message: "Token invalide ou expiré" })
     }
 
     const hashedPassword = await argon2.hash(password)

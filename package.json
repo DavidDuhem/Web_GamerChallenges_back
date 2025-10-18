@@ -15,7 +15,9 @@
     "db:migrate:reset": "docker compose exec gamer-challenges-api npx prisma migrate reset --force",
     "db:migrate:dev": "docker compose exec gamer-challenges-api npx prisma migrate dev --name init",
     "db:generate": "docker compose exec gamer-challenges-api npx prisma generate",
-    "db:reinit": "npm run db:migrate:reset && npm run db:migrate:dev && npm run db:generate && npm run db:seed"
+    "db:reinit": "npm run db:migrate:reset && npm run db:migrate:dev && npm run db:generate && npm run db:seed",
+    "======= Pour les tests ========": "========================",
+    "test:spec": "tsx --test --env-file=./src/test/config/.env.test --import ./src/test/config/global-setup.ts --experimental-test-isolation=none ./src/controllers/**/*.spec.test.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -41,7 +43,7 @@
     "@prisma/client": "^6.16.2",
     "@types/cors": "^2.8.19",
     "argon2": "^0.44.0",
-    "axios": "^1.10.0",
+    "axios": "^1.12.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^5.1.0",
@@ -56,6 +58,7 @@
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0",
     "yamljs": "^0.3.0",
-    "zod": "^4.1.9"
+    "zod": "^4.1.9",
+    "zx": "^8.8.4"
   }
 }

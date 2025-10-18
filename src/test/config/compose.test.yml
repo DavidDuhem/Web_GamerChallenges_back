@@ -1,0 +1,9 @@
+services:
+  gamer-challenges-test-database:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=gamerchallengestest
+      - POSTGRES_PASSWORD=gamerchallengestest
+      - POSTGRES_DB=gamerchallengestest
+    ports:
+      - 5437:5432
