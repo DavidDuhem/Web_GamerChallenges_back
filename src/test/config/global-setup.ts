@@ -7,11 +7,7 @@ import { prisma } from "../../../prisma/index.js"
 
 let server: Server
 
-async function waitForPostgres(
-  host = "localhost",
-  port = 55432,
-  user = "test"
-) {
+async function waitForPostgres(host = "localhost", port = 5437, user = "test") {
   const { exec } = await import("child_process")
   const wait = () => new Promise((resolve) => setTimeout(resolve, 2000))
 

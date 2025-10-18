@@ -1,4 +1,17 @@
 services:
+  # Service Node pour lancer Prisma et les tests
+  gamer-challenges-api:
+    image: node:22
+    working_dir: /app
+    volumes:
+      - ../../../:/app # monte ton projet dans le conteneur
+    command: sleep infinity # garde le conteneur en vie
+    depends_on:
+      - gamer-challenges-test-database
+    environment:
+      # Se connecte au conteneur Postgres via le réseau Docker
+      DATABASE_URL: postgres://gamerchallengestest:gamerchallengestest@gamer-challenges-test-database:5432/gamerchallengestest
+
   gamer-challenges-test-database:
     image: postgres:17
     environment:
@@ -6,4 +19,4 @@ services:
       - POSTGRES_PASSWORD=gamerchallengestest
       - POSTGRES_DB=gamerchallengestest
     ports:
-      - 55432:5432
+      - 5437:5432
