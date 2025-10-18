@@ -148,7 +148,7 @@ export default class AuthController extends BaseController<User, "user_id"> {
       return res.status(401).json({ message: "Refresh Token invalide" })
     }
 
-    if (existingRefreshToken.expired_at < new Date()) {
+    if (existingRefreshToken.expires_at < new Date()) {
       await prisma.token.delete({
         where: { id: existingRefreshToken.id },
       })
@@ -231,7 +231,7 @@ export default class AuthController extends BaseController<User, "user_id"> {
     const resetToken = await prisma.token.findUnique({ where: { token } })
 
     if (!resetToken || resetToken.expires_at < new Date()) {
-      res.status(400).json({ message: "Token invalide ou expiré" })
+      return res.status(400).json({ message: "Token invalide ou expiré" })
     }
 
     const hashedPassword = await argon2.hash(password)

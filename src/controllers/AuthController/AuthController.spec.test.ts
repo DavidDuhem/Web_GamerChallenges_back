@@ -5,7 +5,6 @@ import { beforeEach, describe, it } from "node:test"
 import { prisma } from "../../../prisma/index.js"
 import axios from "axios"
 import { User } from "@prisma/client"
-import { generateAuthenticationTokens } from "../../utils/tokens.js"
 
 describe("[POST] /auth/register", () => {
   const USER = {
@@ -113,14 +112,112 @@ describe("[POST] /auth/login", () => {
 
 describe("[POST] /auth/logout", () => {
   it("should return a 204 status and new cookies to unset existing ones", async () => {
-    it.mock.method(Math, "random", () => "FAKE")
+    const httpResponse = await axios.post(
+      "http://localhost:7357/api/auth/logout"
+    )
 
-    const httpResponse = await fetch("http://localhost:7357/api/auth/logout", {
-      method: "POST",
-    })
+    const setCookie = httpResponse.headers["set-cookie"]
+
+    if (!setCookie) {
+      throw new Error("Aucun cookie reçu dans la réponse")
+    }
+
+    const cookieHeader = Array.isArray(setCookie)
+      ? setCookie.join(", ")
+      : setCookie
 
     assert.strictEqual(httpResponse.status, 204)
-    assert.match(httpResponse.headers.get("set-cookie")!, /accessToken=/)
-    assert.match(httpResponse.headers.get("set-cookie")!, /refreshToken=/)
+    assert.match(cookieHeader, /accessToken=;/)
+    assert.match(cookieHeader, /Expires=Thu, 01 Jan 1970 00:00:00 GMT/)
+    assert.match(cookieHeader, /refreshToken=;/)
+  })
+})
+
+describe("[POST] /auth/refresh", () => {
+  it("should return a new access token an refresh token", async () => {
+    // ARRANGE
+    const user = await prisma.user.create({
+      data: {
+        pseudo: "JohnDoe",
+        email: `john2@doe.io`,
+        password: "password",
+        role: "member",
+        avatar: "",
+      },
+    })
+
+    await prisma.token.create({
+      data: {
+        token: "12345",
+        user_id: user.user_id,
+        token_type: "refresh",
+        expires_at: new Date("2080/01/01"),
+      },
+    })
+
+    // ACT
+    const httpResponse = await axios.post(
+      "http://localhost:7357/api/auth/refresh",
+      {},
+      {
+        headers: {
+          Cookie: "refreshToken=12345",
+        },
+      }
+    )
+
+    const setCookie = httpResponse.headers["set-cookie"]
+
+    if (!setCookie) {
+      throw new Error("Aucun cookie reçu dans la réponse")
+    }
+
+    const cookieHeader = Array.isArray(setCookie)
+      ? setCookie.join(", ")
+      : setCookie
+
+    // ASSERT
+    assert.strictEqual(httpResponse.status, 200)
+    assert.match(cookieHeader, /accessToken=/)
+  })
+
+  it("should return 401 when the access token is not valid", async () => {
+    const user = await prisma.user.create({
+      data: {
+        pseudo: "JohnDoe",
+        email: `john2@doe.io`,
+        password: "password",
+        role: "member",
+        avatar: "",
+      },
+    })
+
+    await prisma.token.create({
+      data: {
+        token: "12345",
+        user_id: user.user_id,
+        token_type: "refresh",
+        expires_at: new Date("1990/01/01"),
+      },
+    })
+
+    try {
+      const httpResponse = await axios.post(
+        "http://localhost:7357/api/auth/refresh",
+        {},
+        {
+          headers: {
+            Cookie: "refreshToken=12345",
+          },
+        }
+      )
+      assert.fail("Request should have failed with error 401")
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        assert.strictEqual(error.response.status, 401)
+      } else {
+        throw error
+      }
+    }
   })
 })
