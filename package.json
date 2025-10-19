@@ -19,7 +19,8 @@
     "======= Pour les tests ========": "========================",
     "test:spec": "tsx --test --env-file=./src/test/config/.env.test --import ./src/test/config/global-setup.ts --experimental-test-isolation=none ./src/controllers/**/*.spec.test.ts",
     "db:test:generate": "docker compose -f src/test/config/compose.test.yml exec gamer-challenges-test-api npx prisma generate",
-    "db:test:remove": "docker compose -f src/test/config/compose.test.yml down || true"
+    "docker:test:down": "docker compose -f src/test/config/compose.test.yml down || true",
+    "docker:test:up": "docker compose -f src/test/config/compose.test.yml up -d"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

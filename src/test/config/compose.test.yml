@@ -1,6 +1,6 @@
 services:
   # Service Node pour lancer Prisma et les tests
-  gamer-challenges-api:
+  gamer-challenges-test-api:
     image: node:22
     working_dir: /app
     volumes:
