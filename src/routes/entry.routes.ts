@@ -29,13 +29,13 @@ router.post(
 
 router.patch(
   "/:entryId",
-  verifyToken({ ownerRequired: true }),
+  verifyToken({ validityRequired: true }),
   cw((req, res) => entryController.updateEntry(req, res))
 )
 
 router.delete(
   "/:entryId",
-  verifyToken({ ownerRequired: true }),
+  verifyToken({ validityRequired: true }),
   cw((req, res) => entryController.deleteEntry(req, res))
 )
 
