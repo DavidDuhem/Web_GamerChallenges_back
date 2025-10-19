@@ -44,7 +44,7 @@ export async function sendEmailForgotPassword({
       html: `
       <h1>Réinitialisation de votre mot de passe</h1>
       <p>Cliquez sur ce lien pour réinitialiser votre mot de passe :</p>
-      <a href="http://localhost:3000/reset-password?token=${token}">http://localhost:3000/reset-password?token=${token}</a>
+      <a href="${process.env.MAIL_RESET_LINK}/reset-password?token=${token}">${process.env.MAIL_RESET_LINK}/reset-password?token=${token}</a>
       <p>Ce lien expirera dans 15 minutes.</p>
     `,
     })
