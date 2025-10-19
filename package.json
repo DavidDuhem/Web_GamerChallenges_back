@@ -16,6 +16,7 @@
     "db:migrate:dev": "docker compose exec gamer-challenges-api npx prisma migrate dev --name init",
     "db:generate": "docker compose exec gamer-challenges-api npx prisma generate",
     "db:reinit": "npm run db:migrate:reset && npm run db:migrate:dev && npm run db:generate && npm run db:seed",
+    "start-prod": "npm i && npx prisma migrate reset --force && npx prisma migrate dev --name init && npx prisma generate && npx tsx --env-file=.env prisma/seeding.ts && tsc && node dist/index.js",
     "======= Pour les tests ========": "========================",
     "test:spec": "tsx --test --env-file=./src/test/config/.env.test --import ./src/test/config/global-setup.ts --experimental-test-isolation=none ./src/controllers/**/*.spec.test.ts",
     "db:test:generate": "docker compose -f src/test/config/compose.test.yml exec gamer-challenges-test-api npx prisma generate",
