@@ -7,13 +7,34 @@ import { prisma } from "../../../prisma/index.js"
 
 let server: Server
 
+async function waitForPostgres(host = "localhost", port = 5437, user = "test") {
+  const { exec } = await import("child_process")
+  const wait = () => new Promise((resolve) => setTimeout(resolve, 2000))
+
+  for (let i = 0; i < 15; i++) {
+    try {
+      await $`pg_isready -h ${host} -p ${port} -U ${user}`
+      return
+    } catch {
+      console.log("Waiting for Postgres...")
+      await wait()
+    }
+  }
+  throw new Error("Postgres did not become ready in time")
+}
+
 before(async () => {
   const composeFileAbsolutePath = path
     .resolve(import.meta.dirname, "compose.test.yml")
     .replace(/\\/g, "/")
 
-  await $`docker compose -f "${composeFileAbsolutePath}" -p gamerchallengestest up -d`
-  await new Promise((r) => setTimeout(r, 1000))
+  if (!process.env.CI) {
+    await $`docker compose -f "${composeFileAbsolutePath}" -p gamerchallengestest up -d`
+    //   await new Promise((r) => setTimeout(r, 1000))
+    await waitForPostgres()
+  } else {
+    console.log("Running in CI, skipping docker compose up")
+  }
 
   const prismaSchemaAbsolutePath = path.resolve(
     import.meta.dirname,
@@ -30,7 +51,9 @@ beforeEach(async () => {
 after(async () => {
   server.close()
   await prisma.$disconnect()
-  await $`docker compose -p gamerchallengestest down > /dev/null 2>&1`
+  if (!process.env.CI) {
+    await $`docker compose -p gamerchallengestest down > /dev/null 2>&1`
+  }
 })
 
 async function truncateTables() {
