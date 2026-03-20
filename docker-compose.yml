@@ -1,6 +1,6 @@
 services:
   gamer-challenges-db:
-    image: postgres:latest
+    image: postgres:17
     container_name: gamer-challenges-db
     restart: always
     environment:
@@ -8,70 +8,33 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: ${PG_DATABASE}
     volumes:
-      - ./data:/docker-entrypoint-initdb.d
       - ./pg-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DATABASE}"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
     networks:
-      - gamerchallenge-network
+      - gc-network
 
   gamer-challenges-api:
-    image: node:22-alpine
+    build:
+      context: .
+      args:
+        - NODE_ENV=${NODE_ENV}
     container_name: gamer-challenges-api
-    working_dir: /app
-    volumes:
-      - .:/app
-      - /app/node_modules
+    restart: unless-stopped
     ports:
-      - "${PORT}:5000"
+      - "${PORT}:5006"
     environment:
-      - NODE_ENV=development
+      - PORT=5006
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+      - JWT_SECRET=${JWT_SECRET}
+      - NODE_ENV=${NODE_ENV}
       - PGHOST=gamer-challenges-db
       - PGPORT=${PG_PORT}
       - PGUSER=${PG_USER}
       - PGPASSWORD=${PG_PASSWORD}
-      - CHOKIDAR_USEPOLLING=true
+      - DATABASE_URL=postgres://${PG_USER}:${PG_PASSWORD}@gamer-challenges-db:${PG_PORT}/${PG_DATABASE}
     depends_on:
-      gamer-challenges-db:
-        condition: service_healthy
-    command: ["npm", "run", "docker:start:dev"]
-    restart: unless-stopped
+      - gamer-challenges-db
     networks:
-      - gamerchallenge-network
-  gamer-challenges-adminer:
-    image: adminer:latest
-    container_name: gamer-challenges-adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    depends_on:
-      gamer-challenges-db:
-        condition: service_healthy
-    networks:
-      - gamerchallenge-network
-  gamer-challenges-mailpit:
-    image: axllent/mailpit
-    container_name: gamer-challenges-mailpit
-    restart: unless-stopped
-    volumes:
-      - ./data:/data
-    ports:
-      - 8025:8025
-      - 1025:1025
-    environment:
-      MP_MAX_MESSAGES: 5000
-      MP_DATABASE: /data/mailpit.db
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-    networks:
-      - gamerchallenge-network
+      - gc-network
 
 networks:
-  gamerchallenge-network:
-
-volumes:
-  pg_data:
-  node_modules_cache:
+  gc-network:

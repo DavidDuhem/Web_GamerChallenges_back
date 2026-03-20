@@ -1,0 +1,22 @@
+%%mocodo
+:::
+challenge: code_challenge, nom, description, règles, date_creation, #code_jeu > jeu > code_jeu, #code_utilisateur > utilisateur > code_utilisateur
+:::
+participation: code_participation, titre, video_url, date_creation, #code_challenge > challenge > code_challenge, #code_utilisateur > utilisateur > code_utilisateur
+:::
+
+
+:
+jeu: code_jeu, titre, image_url
+:
+voter_challenge: #code_utilisateur > utilisateur > code_utilisateur, _#code_challenge > challenge > code_challenge
+:::::
+voter_participation: #code_utilisateur > utilisateur > code_utilisateur, _#code_participation > participation > code_participation
+:
+
+
+:::::
+utilisateur: code_utilisateur, pseudo, avatar_url, email, mot_de_passe, rôle
+:::
+jeton: code_jeton, valeur, type, date_creation, date_expiration, #code_utilisateur > utilisateur > code_utilisateur
+:

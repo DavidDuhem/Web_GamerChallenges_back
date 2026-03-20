@@ -1,0 +1,17 @@
+associer, 11 challenge, 0N jeu
+challenge: code_challenge, nom, description, règles, date_creation
+posséder, 0N challenge, 11 participation
+participation: code_participation, titre, video_url, date_creation
+:
+
+jeu: code_jeu, titre, image_url
+voter_challenge, 0N utilisateur, 0N challenge
+créer, 0N utilisateur, 11 challenge
+publier, 0N utilisateur, 11 participation
+voter_participation, 0N utilisateur, 0N participation
+
+:
+:
+utilisateur: code_utilisateur, pseudo, avatar_url, email, mot_de_passe, rôle
+appartenir_à, 0N utilisateur, 11 jeton
+jeton: code_jeton, valeur, type, date_creation, date_expiration

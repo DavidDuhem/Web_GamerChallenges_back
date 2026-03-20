@@ -1,0 +1,49 @@
+{
+  "width": 625,
+  "height": 372,
+  "cx": [
+    [ "ASSOCIER", 45 ],
+    [ "CHALLENGE", 169 ],
+    [ "POSSEDER", 288 ],
+    [ "PARTICIPATION", 420 ],
+    [ "JEU", 45 ],
+    [ "VOTER_CHALLENGE", 169 ],
+    [ "CREER", 288 ],
+    [ "PUBLIER", 420 ],
+    [ "VOTER_PARTICIPATION", 551 ],
+    [ "UTILISATEUR", 288 ],
+    [ "APPARTENIR_A", 420 ],
+    [ "JETON", 551 ]
+  ],
+  "cy": [
+    [ "ASSOCIER", 68 ],
+    [ "CHALLENGE", 68 ],
+    [ "POSSEDER", 68 ],
+    [ "PARTICIPATION", 68 ],
+    [ "JEU", 177 ],
+    [ "VOTER_CHALLENGE", 177 ],
+    [ "CREER", 177 ],
+    [ "PUBLIER", 177 ],
+    [ "VOTER_PARTICIPATION", 177 ],
+    [ "UTILISATEUR", 295 ],
+    [ "APPARTENIR_A", 295 ],
+    [ "JETON", 295 ]
+  ],
+  "shift": [
+    [ "ASSOCIER,CHALLENGE,0", 0 ],
+    [ "ASSOCIER,JEU,0", 0 ],
+    [ "POSSEDER,CHALLENGE,0", 0 ],
+    [ "POSSEDER,PARTICIPATION,0", 0 ],
+    [ "VOTER_CHALLENGE,UTILISATEUR,0", 0 ],
+    [ "VOTER_CHALLENGE,CHALLENGE,0", 0 ],
+    [ "CREER,UTILISATEUR,0", 0 ],
+    [ "CREER,CHALLENGE,0", 0 ],
+    [ "PUBLIER,UTILISATEUR,0", 0 ],
+    [ "PUBLIER,PARTICIPATION,0", 0 ],
+    [ "VOTER_PARTICIPATION,UTILISATEUR,0", 0 ],
+    [ "VOTER_PARTICIPATION,PARTICIPATION,0", 0 ],
+    [ "APPARTENIR_A,UTILISATEUR,0", 0 ],
+    [ "APPARTENIR_A,JETON,0", 0 ]
+  ],
+  "ratio": []
+}
