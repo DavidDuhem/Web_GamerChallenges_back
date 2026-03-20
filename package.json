@@ -3,6 +3,8 @@
   "type": "module",
   "scripts": {
     "======= Pour le dev ========": "========================",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "dev": "tsx watch --env-file=.env index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
@@ -11,7 +13,7 @@
     "docker:up": "docker compose up -d --build",
     "docker:start:dev": "npm i && npm run prisma:generate && npm run dev",
     "prisma:generate": "prisma generate",
-    "db:seed": "docker compose exec gamer-challenges-api npx tsx --env-file=.env prisma/seeding.ts",
+    "db:seed": "docker compose exec gamer-challenges-api node dist/prisma/seeding.js",
     "db:migrate:reset": "docker compose exec gamer-challenges-api npx prisma migrate reset --force",
     "db:migrate:dev": "docker compose exec gamer-challenges-api npx prisma migrate dev --name init",
     "db:generate": "docker compose exec gamer-challenges-api npx prisma generate",
