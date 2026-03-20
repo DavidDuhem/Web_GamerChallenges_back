@@ -24,6 +24,7 @@ services:
     environment:
       - PORT=5006
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+      - JWT_SECRET=${JWT_SECRET}
       - NODE_ENV=${NODE_ENV}
       - PGHOST=gamer-challenges-db
       - PGPORT=${PG_PORT}
